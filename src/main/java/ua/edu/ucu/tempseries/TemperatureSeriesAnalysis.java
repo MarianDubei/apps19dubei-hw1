@@ -17,7 +17,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
-        static final double minTemperature = -273.0;
+        final double minTemperature = -273.0;
         for (int i = 0; i < temperatureSeries.length; i++) {
             if (temperatureSeries[i] < minTemperature) {
                 throw new InputMismatchException();
@@ -83,9 +83,8 @@ public class TemperatureSeriesAnalysis {
         isEmpty();
         double minDifference = Math.abs(temperatureArray[0] - tempValue);
         double closestValue = temperatureArray[0];
-        static final double minDiff = 0.0001;
         for (int i = 1; i < tempSize; i++) {
-            if (Math.abs(minDifference - Math.abs(temperatureArray[i] - tempValue)) < minDiff) {
+            if (minDifference > Math.abs(temperatureArray[i] - tempValue)) {
                 minDifference = Math.abs(temperatureArray[i] - tempValue);
                 closestValue = temperatureArray[i];
             } else if (minDifference == Math.abs(temperatureArray[i] - tempValue)) {
