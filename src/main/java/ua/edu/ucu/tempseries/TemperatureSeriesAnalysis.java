@@ -11,14 +11,14 @@ public class TemperatureSeriesAnalysis {
 
 
     public TemperatureSeriesAnalysis() {
-        this.tempCapacity = 1   ;
+        this.tempCapacity = 1;
         this.temperatureArray = new double[tempCapacity];
         this.tempSize = 0;
     }
 
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
-        for (int i = 0; i < temperatureSeries.length; i++){
-            if (temperatureSeries[i] < -273.0){
+        for (int i = 0; i < temperatureSeries.length; i++) {
+            if (temperatureSeries[i] < -273.0) {
                 throw new InputMismatchException();
             }
         }
@@ -27,8 +27,8 @@ public class TemperatureSeriesAnalysis {
         this.tempCapacity = tempSize;
     }
 
-    private void isEmpty(){
-        if (tempSize == 0){
+    private void isEmpty() {
+        if (tempSize == 0) {
             throw new IllegalArgumentException();
         }
     }
@@ -36,7 +36,7 @@ public class TemperatureSeriesAnalysis {
     public double average() {
         isEmpty();
         double average = 0;
-        for (int  i = 0; i < tempSize; i++) {
+        for (int i = 0; i < tempSize; i++) {
             average += temperatureArray[i];
         }
         return average / tempSize;
@@ -67,7 +67,7 @@ public class TemperatureSeriesAnalysis {
         isEmpty();
         double max = temperatureArray[0];
         for (int i = 1; i < tempSize; i++) {
-            if (max < temperatureArray[i]){
+            if (max < temperatureArray[i]) {
                 max = temperatureArray[i];
             }
         }
@@ -86,7 +86,7 @@ public class TemperatureSeriesAnalysis {
             if (minDifference > Math.abs(temperatureArray[i] - tempValue)) {
                 minDifference = Math.abs(temperatureArray[i] - tempValue);
                 closestValue = temperatureArray[i];
-            } else if (minDifference == Math.abs(temperatureArray[i] - tempValue)){
+            } else if (minDifference == Math.abs(temperatureArray[i] - tempValue)) {
                 closestValue = Math.max(closestValue, temperatureArray[i]);
             }
         }
@@ -95,7 +95,6 @@ public class TemperatureSeriesAnalysis {
 
     private double[] findTemps(double tempValue, boolean isGreater) {
         TemperatureSeriesAnalysis temps = new TemperatureSeriesAnalysis();
-        int idx = 0;
         if (isGreater) {
             for (int i = 0; i < tempSize; i++) {
                 if (temperatureArray[i] > tempValue) {
