@@ -18,7 +18,7 @@ public class TemperatureSeriesAnalysis {
 
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
         for (int i = 0; i < temperatureSeries.length; i++) {
-            if (temperatureSeries[i] < -273.0) {
+            if (temperatureSeries[i] < -273) {
                 throw new InputMismatchException();
             }
         }
@@ -47,7 +47,7 @@ public class TemperatureSeriesAnalysis {
         double avg = average();
         double sum = 0.0;
         for (int i = 0; i < tempSize; i++) {
-            sum += Math.pow(temperatureArray[i] - avg, 2);
+            sum += (temperatureArray[i] - avg) * (temperatureArray[i] - avg);
         }
         return Math.sqrt(sum / (tempSize - 1));
     }
@@ -83,10 +83,12 @@ public class TemperatureSeriesAnalysis {
         double minDifference = Math.abs(temperatureArray[0] - tempValue);
         double closestValue = temperatureArray[0];
         for (int i = 1; i < tempSize; i++) {
-            if (minDifference > Math.abs(temperatureArray[i] - tempValue)) {
+            if (Math.abs(minDifference - Math.abs(
+                    temperatureArray[i] - tempValue)) < 0.0001) {
                 minDifference = Math.abs(temperatureArray[i] - tempValue);
                 closestValue = temperatureArray[i];
-            } else if (minDifference == Math.abs(temperatureArray[i] - tempValue)) {
+            } else if (minDifference == Math.abs(
+                    temperatureArray[i] - tempValue)) {
                 closestValue = Math.max(closestValue, temperatureArray[i]);
             }
         }
@@ -109,7 +111,8 @@ public class TemperatureSeriesAnalysis {
             }
         }
         double[] tempsArrayWithoutEmpty = new double[temps.tempSize];
-        System.arraycopy(temps.temperatureArray, 0, tempsArrayWithoutEmpty, 0, temps.tempSize);
+        System.arraycopy(temps.temperatureArray, 0,
+                tempsArrayWithoutEmpty, 0, temps.tempSize);
         return tempsArrayWithoutEmpty;
     }
 
@@ -133,7 +136,8 @@ public class TemperatureSeriesAnalysis {
             } else {
                 tempCapacity *= 2;
                 double[] newTemperatureArray = new double[tempCapacity];
-                System.arraycopy(temperatureArray, 0, newTemperatureArray, 0, tempSize);
+                System.arraycopy(temperatureArray, 0,
+                        newTemperatureArray, 0, tempSize);
                 temperatureArray = newTemperatureArray;
                 temperatureArray[tempSize++] = temps[i];
             }
