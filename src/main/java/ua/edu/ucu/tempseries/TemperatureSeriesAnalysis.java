@@ -17,9 +17,9 @@ public class TemperatureSeriesAnalysis {
     }
 
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
-        final double minTemperature = -273.0;
+        final double MINTEMP = -273.0;
         for (int i = 0; i < temperatureSeries.length; i++) {
-            if (temperatureSeries[i] < minTemperature) {
+            if (temperatureSeries[i] < MINTEMP) {
                 throw new InputMismatchException();
             }
         }
@@ -83,11 +83,13 @@ public class TemperatureSeriesAnalysis {
         isEmpty();
         double minDifference = Math.abs(temperatureArray[0] - tempValue);
         double closestValue = temperatureArray[0];
+        final double minDiff = 0.001;
         for (int i = 1; i < tempSize; i++) {
             if (minDifference > Math.abs(temperatureArray[i] - tempValue)) {
                 minDifference = Math.abs(temperatureArray[i] - tempValue);
                 closestValue = temperatureArray[i];
-            } else if (minDifference == Math.abs(temperatureArray[i] - tempValue)) {
+            } else if (Math.abs(minDifference - Math.abs(
+                    temperatureArray[i] - tempValue)) < minDiff) {
                 closestValue = Math.max(closestValue, temperatureArray[i]);
             }
         }
@@ -135,7 +137,8 @@ public class TemperatureSeriesAnalysis {
             } else {
                 tempCapacity *= 2;
                 double[] newTemperatureArray = new double[tempCapacity];
-                System.arraycopy(temperatureArray, 0, newTemperatureArray, 0, tempSize);
+                System.arraycopy(temperatureArray, 0,
+                        newTemperatureArray, 0, tempSize);
                 temperatureArray = newTemperatureArray;
                 temperatureArray[tempSize++] = temps[i];
             }
