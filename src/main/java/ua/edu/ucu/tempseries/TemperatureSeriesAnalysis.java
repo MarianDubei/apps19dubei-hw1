@@ -1,6 +1,7 @@
 package ua.edu.ucu.tempseries;
 
 import java.util.Arrays;
+import java.util.InputMismatchException;
 
 
 public class TemperatureSeriesAnalysis {
@@ -16,6 +17,11 @@ public class TemperatureSeriesAnalysis {
     }
 
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
+        for (int i = 0; i < temperatureSeries; i++){
+            if (temperatureSeries[i] < -273.0){
+                throw new InputMismatchException();
+            }
+        }
         this.tempSize = temperatureSeries.length;
         this.temperatureArray = Arrays.copyOf(temperatureSeries, tempSize);
         this.tempCapacity = tempSize;
