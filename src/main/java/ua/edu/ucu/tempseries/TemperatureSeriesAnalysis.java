@@ -17,7 +17,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
-        for (int i = 0; i < temperatureSeries; i++){
+        for (int i = 0; i < temperatureSeries.length; i++){
             if (temperatureSeries[i] < -273.0){
                 throw new InputMismatchException();
             }
