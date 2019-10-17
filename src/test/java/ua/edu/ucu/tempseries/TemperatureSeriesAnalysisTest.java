@@ -127,7 +127,7 @@ public class TemperatureSeriesAnalysisTest {
     @Test
     public void testSummaryStatistics() {
         TempSummaryStatistics summary = seriesAnalysis1.summaryStatistics();
-        double[] actualResult = (new double[] {summary.avgTemp, summary.devTemp, summary.minTemp, summary.maxTemp});
+        double[] actualResult = (new double[] {summary.getAvgTemp(), summary.getDevTemp(), summary.getMinTemp(), summary.getMaxTemp()});
         double[] expResult = (new double[] {1.0, 4.32, -5.0, 5.0});
         assertArrayEquals(expResult, actualResult, 0.001);
     }
